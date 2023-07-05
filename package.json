@@ -1,7 +1,7 @@
 {
-    "name": "steam-comment-bot-template",
-    "version": "1.0.1",
-    "description": "This is a steam-comment-service-bot template plugin to help you create your own.",
+    "name": "steam-comment-bot-discord-plugin",
+    "version": "0.1.0",
+    "description": "Discord plugin for the steam-comment-service-bot",
     "dependencies": {
         "output-logger": "^2.3.6"
     },
@@ -10,6 +10,6 @@
         "eslint-plugin-jsdoc": "^46.4.3"
     },
     "author": "3urobeat",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "main": "plugin.js"
 }
