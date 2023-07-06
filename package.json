@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "Discord plugin for the steam-comment-service-bot",
     "dependencies": {
+        "discord.js": "^14.11.0",
         "output-logger": "^2.3.6"
     },
     "devDependencies": {
