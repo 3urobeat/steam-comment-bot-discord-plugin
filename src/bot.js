@@ -4,7 +4,7 @@
  * Created Date: 06.07.2023 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 06.07.2023 21:23:42
+ * Last Modified: 20.12.2023 14:17:28
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -29,6 +29,9 @@ const DiscordBot = function(plugin) {
     this.plugin = plugin;
     logger = this.plugin.controller.logger;
 
+    // Load all helpers
+    require("./helpers/registerCommands.js");
+
     // Create a new Discord Bot instance
     this.bot = new Discord.Client({
         intents: []
@@ -46,6 +49,9 @@ DiscordBot.prototype.attachEventHandlers = function() {
     // Attach ready event to get notified when the bot is logged in
     this.bot.on("ready", () => {
         logger("info", "Discord Plugin: Logged in!");
+
+        // Register all commands from the bot
+        this.registerCommands(); // TODO: Commands added by plugins at runtime will probably be missing
     });
 
 };
@@ -65,3 +71,11 @@ DiscordBot.prototype.logout = function() {
     this.bot.destroy();
     delete this.bot;
 };
+
+
+/* -------- Register functions to let the IntelliSense know what's going on in helper files -------- */
+
+/**
+ * Register all Steam Comment Bot commands as slash commands
+ */
+DiscordBot.prototype.registerCommands = function() {};
