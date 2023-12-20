@@ -4,7 +4,7 @@
  * Created Date: 06.07.2023 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 20.12.2023 14:17:28
+ * Last Modified: 20.12.2023 15:19:00
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -30,6 +30,7 @@ const DiscordBot = function(plugin) {
     logger = this.plugin.controller.logger;
 
     // Load all helpers
+    require("./helpers/handleInteraction.js");
     require("./helpers/registerCommands.js");
 
     // Create a new Discord Bot instance
@@ -54,6 +55,11 @@ DiscordBot.prototype.attachEventHandlers = function() {
         this.registerCommands(); // TODO: Commands added by plugins at runtime will probably be missing
     });
 
+    // Let handleInteraction helper handle the interaction
+    this.bot.on("interactionCreate", (interaction) => {
+        this.handleInteraction(interaction);
+    });
+
 };
 
 
@@ -74,6 +80,12 @@ DiscordBot.prototype.logout = function() {
 
 
 /* -------- Register functions to let the IntelliSense know what's going on in helper files -------- */
+
+/**
+ * Handles interaction when user runs a command
+ * @param {Discord.Interaction} interaction
+ */
+DiscordBot.prototype.handleInteraction = function(interaction) {}; // eslint-disable-line
 
 /**
  * Register all Steam Comment Bot commands as slash commands
