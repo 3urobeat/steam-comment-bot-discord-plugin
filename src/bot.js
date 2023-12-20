@@ -4,7 +4,7 @@
  * Created Date: 06.07.2023 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 20.12.2023 15:19:00
+ * Last Modified: 20.12.2023 17:04:57
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -50,6 +50,16 @@ DiscordBot.prototype.attachEventHandlers = function() {
     // Attach ready event to get notified when the bot is logged in
     this.bot.on("ready", () => {
         logger("info", "Discord Plugin: Logged in!");
+
+        // Set first game in Steam Bot config as status
+        let game = this.plugin.data.config.playinggames[0];
+
+        if (game && typeof game == "string") {
+            this.bot.user.setPresence({
+                activities: [{ name: game, type: 0 }], // Type 0 is playing
+                status: "online"
+            });
+        }
 
         // Register all commands from the bot
         this.registerCommands(); // TODO: Commands added by plugins at runtime will probably be missing
