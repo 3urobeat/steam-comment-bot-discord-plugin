@@ -4,7 +4,7 @@
  * Created Date: 05.07.2023 12:26:40
  * Author: 3urobeat
  *
- * Last Modified: 06.07.2023 21:23:05
+ * Last Modified: 21.12.2023 16:46:26
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -53,6 +53,8 @@ module.exports = Plugin;
  * This function will be called by the plugin loader after updating but before logging in. Initialize your plugin here.
  */
 Plugin.prototype.load = async function() {
+    logger("info", "Discord Plugin: Initializing...", false, false, null, logger.animation("loading"));
+
     this.pluginConfig = await this.sys.loadPluginConfig(pluginPackage.name); // Load your config
 
     this.discord.login();
@@ -62,8 +64,7 @@ Plugin.prototype.load = async function() {
 /**
  * This function will be called when the bot is ready (aka all accounts were logged in).
  */
-Plugin.prototype.ready = async function() {
-};
+Plugin.prototype.ready = async function() {};
 
 
 /**
@@ -82,8 +83,7 @@ Plugin.prototype.unload = function () {
  * @param {Bot.EStatus} oldStatus The old status it had
  * @param {Bot.EStatus} newStatus The new status it now has
  */
-Plugin.prototype.statusUpdate = function(bot, oldStatus, newStatus) {
-};
+Plugin.prototype.statusUpdate = function(bot, oldStatus, newStatus) {}; // eslint-disable-line
 
 
 /**
@@ -91,5 +91,4 @@ Plugin.prototype.statusUpdate = function(bot, oldStatus, newStatus) {
  * @param {Bot} bot The bot object of the affected account
  * @param {function(string): void} submitCode Function to submit a code. Pass an empty string to skip the account.
  */
-Plugin.prototype.steamGuardInput = function(bot, submitCode) { // eslint-disable-line
-};
+Plugin.prototype.steamGuardInput = function(bot, submitCode) {}; // eslint-disable-line

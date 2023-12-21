@@ -4,7 +4,7 @@
  * Created Date: 06.07.2023 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 20.12.2023 17:04:57
+ * Last Modified: 21.12.2023 16:44:15
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -20,6 +20,7 @@ const Discord = require("discord.js");
 const Plugin = require("../plugin.js"); // eslint-disable-line
 
 let logger;
+
 
 /**
  * Creates a Discord Bot Instance
@@ -45,6 +46,9 @@ const DiscordBot = function(plugin) {
 module.exports = DiscordBot;
 
 
+/**
+ * Attaches Discord event handlers
+ */
 DiscordBot.prototype.attachEventHandlers = function() {
 
     // Attach ready event to get notified when the bot is logged in
@@ -73,18 +77,23 @@ DiscordBot.prototype.attachEventHandlers = function() {
 };
 
 
+/**
+ * Logs into Discord
+ */
 DiscordBot.prototype.login = function() {
-
-    // TODO: Check if no token was provided and abort
+    if (!this.plugin.pluginConfig.token) return logger("error", "Discord Plugin: Failed to login, no token set in config!");
 
     // Login using the token set in the config
     this.bot.login(this.plugin.pluginConfig.token);
-
 };
 
 
+/**
+ * Logs out of Discord
+ */
 DiscordBot.prototype.logout = function() {
     this.bot.destroy();
+
     delete this.bot;
 };
 
