@@ -3,12 +3,12 @@
     "version": "1.0.0",
     "description": "Discord plugin for the steam-comment-service-bot",
     "dependencies": {
-        "discord.js": "^14.11.0",
-        "output-logger": "^2.3.6"
+        "discord.js": "^14.14.1",
+        "output-logger": "^2.3.7"
     },
     "devDependencies": {
-        "eslint": "^8.44.0",
-        "eslint-plugin-jsdoc": "^46.4.3"
+        "eslint": "^8.56.0",
+        "eslint-plugin-jsdoc": "^46.9.1"
     },
     "author": "3urobeat",
     "license": "GPL-3.0",

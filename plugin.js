@@ -4,7 +4,7 @@
  * Created Date: 05.07.2023 12:26:40
  * Author: 3urobeat
  *
- * Last Modified: 21.12.2023 16:46:26
+ * Last Modified: 23.12.2023 16:02:58
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 3urobeat <https://github.com/3urobeat>
@@ -18,8 +18,8 @@
 let logger = require("output-logger"); // eslint-disable-line
 
 // Note: These paths will break when the plugin is loaded. Use them only while developing using 'npm link' for IntelliSense as described here: https://github.com/3urobeat/steam-comment-service-bot/blob/master/docs/wiki/creating_plugins.md#additional-information
-const PluginSystem = require("../steam-comment-service-bot/src/pluginSystem/pluginSystem.js"); // eslint-disable-line
-const Bot          = require("../steam-comment-service-bot/src/bot/bot.js");                   // eslint-disable-line
+//const PluginSystem = require("../steam-comment-service-bot/src/pluginSystem/pluginSystem.js"); // eslint-disable-line
+//const Bot          = require("../steam-comment-service-bot/src/bot/bot.js");                   // eslint-disable-line
 // Do not forget to comment them out when publishing your plugin!
 
 const pluginPackage = require("./package.json"); // eslint-disable-line
