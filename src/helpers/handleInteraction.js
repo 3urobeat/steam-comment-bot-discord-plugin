@@ -1,10 +1,10 @@
 /*
  * File: handleInteraction.js
  * Project: steam-comment-bot-discord-plugin
- * Created Date: 20.12.2023 15:01:09
+ * Created Date: 2023-12-20 15:01:09
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-08 23:07:16
+ * Last Modified: 2024-02-08 23:14:15
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
