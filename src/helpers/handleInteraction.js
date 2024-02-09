@@ -4,7 +4,7 @@
  * Created Date: 2023-12-20 15:01:09
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-08 23:14:15
+ * Last Modified: 2024-02-09 22:17:27
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
@@ -21,7 +21,7 @@ const DiscordBot = require("../bot.js");
 
 
 /**
- * Store previous interactions for 15 min. One command can cause multiple replies but we can only reply to an interaction once, so we need to edit the message.
+ * Store previous interactions for 1 week. One command can cause multiple replies but we can only reply to an interaction once, so we need to edit the message.
  * @type {{[key: string]: { message: Discord.Message, content: string, time: number }}}
  */
 let previousInteractions = {};
@@ -35,7 +35,7 @@ function cleanPreviousInteractions() {
     Object.keys(previousInteractions).forEach((e) => {
         let val = previousInteractions[e];
 
-        if (val.time + 900000 < Date.now()) { // 15 min in ms
+        if (val.time + 6.048e+8 < Date.now()) { // 1 week in ms
             logger("debug", `Discord Plugin: Cleaned out expired previousInteractions entry '${e}'`);
 
             delete previousInteractions[e];
