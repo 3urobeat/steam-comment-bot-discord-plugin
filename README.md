@@ -11,6 +11,8 @@ Setting it up is very simple, you just need to provide a Discord Bot token and i
 The plugin is installed in your `steam-comment-service-bot` installation by default.  
 Please make sure you have the latest version of the Bot installed!  
 
+> **Note:** Make sure to have at least node.js v16.11 installed, as it is required by discord.js
+
 To enable the plugin, make sure you have started the bot at least once.  
 Then, open the `plugin` folder, as well as the `steam-comment-bot-discord-plugin` folder inside.  
 
