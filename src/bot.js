@@ -4,7 +4,7 @@
  * Created Date: 2023-07-06 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-08 23:13:49
+ * Last Modified: 2024-05-17 23:21:15
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
@@ -14,8 +14,6 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-const Discord = require("discord.js");
 
 const Plugin = require("../plugin.js"); // eslint-disable-line
 
@@ -35,6 +33,8 @@ const DiscordBot = function(plugin) {
     require("./helpers/registerCommands.js");
 
     // Create a new Discord Bot instance
+    const Discord = require("discord.js");
+
     this.bot = new Discord.Client({
         intents: []
     });

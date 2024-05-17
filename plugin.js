@@ -4,7 +4,7 @@
  * Created Date: 2023-07-05 12:26:40
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-08 23:13:31
+ * Last Modified: 2024-05-17 23:27:44
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
@@ -24,7 +24,7 @@ let logger = require("output-logger"); // eslint-disable-line
 
 const pluginPackage = require("./package.json"); // eslint-disable-line
 
-const DiscordBot = require("./src/bot.js");
+let pluginLoadWasBlocked = false;
 
 
 /**
@@ -41,7 +41,22 @@ const Plugin = function(sys) {
     this.data           = sys.controller.data;
     this.commandHandler = sys.commandHandler;
 
+
+    // Check for unsupported node.js version (<16.11.0)
+    const versionarr = process.version.replace("v", "").split(".");
+
+    versionarr.forEach((e, i) => { if (e.length == 1 && parseInt(e) < 10) versionarr[i] = `0${e}`; }); // Put 0 in front of single digits
+
+    if (parseInt(versionarr.join("")) < 161100) {
+        logger("error", `Discord Plugin: This plugin requires at least node.js ${logger.colors.reset}v16.11.0${logger.colors.fgred} but you have ${logger.colors.reset}${process.version}${logger.colors.fgred} installed! Refusing to load...`, true);
+        pluginLoadWasBlocked = true;
+        return;
+    }
+
+
     // Create a new Discord Bot object
+    const DiscordBot = require("./src/bot.js");
+
     this.discord = new DiscordBot(this);
 };
 
@@ -53,6 +68,8 @@ module.exports = Plugin;
  * This function will be called by the plugin loader after updating but before logging in. Initialize your plugin here.
  */
 Plugin.prototype.load = async function() {
+    if (pluginLoadWasBlocked) return;
+
     logger("info", "Discord Plugin: Initializing...", false, false, null, logger.animation("loading"));
 
     this.pluginConfig = await this.sys.loadPluginConfig(pluginPackage.name); // Load your config
@@ -72,8 +89,12 @@ Plugin.prototype.ready = async function() {};
  * This plugin doesn't really have anything that needs to be unloaded (for example shutting down a webserver) but including an empty function will suppress a warning.
  */
 Plugin.prototype.unload = function () {
-    this.discord.logout();
-    delete this.discord;
+    if (pluginLoadWasBlocked) return;
+
+    if (this.discord) {
+        this.discord.logout();
+        delete this.discord;
+    }
 };
 
 
