@@ -4,7 +4,7 @@
  * Created Date: 2023-07-06 18:27:16
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-08 23:14:02
+ * Last Modified: 2024-05-17 23:08:48
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
@@ -39,18 +39,20 @@ DiscordBot.prototype.registerCommands = function() {
         };
 
         // Convert our arg objects to the options structure of discord.js
-        for (const arg of e.args) {
-            let thisarg = {
-                name: arg.name.replace(/ /g, "_").replace(/"/g, "").toLowerCase().slice(0, 32),
-                description: arg.description.slice(0, 100),
-                required: !arg.isOptional // TODO: Certain params become required when called from outside Steam
-            };
+        if (e.args && e.args.length > 0) {
+            for (const arg of e.args) {
+                let thisarg = {
+                    name: arg.name.replace(/ /g, "_").replace(/"/g, "").toLowerCase().slice(0, 32),
+                    description: arg.description.slice(0, 100),
+                    required: !arg.isOptional // TODO: Certain params become required when called from outside Steam
+                };
 
-            // TODO: Support other arg types?
-            if (arg.type == "string") thisarg.type = Discord.ApplicationCommandOptionType.String;
+                // TODO: Support other arg types?
+                if (arg.type == "string") thisarg.type = Discord.ApplicationCommandOptionType.String;
 
-            // Push this argument to the array of options
-            thiscmd.options.push(thisarg);
+                // Push this argument to the array of options
+                thiscmd.options.push(thisarg);
+            }
         }
 
         // Register our command
