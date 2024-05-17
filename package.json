@@ -1,7 +1,7 @@
 {
     "name": "steam-comment-bot-discord-plugin",
-    "version": "1.0.2",
-    "botVersion": "2.15.0",
+    "version": "1.0.3",
+    "botVersion": "2.15.2",
     "description": "Discord plugin for the steam-comment-service-bot",
     "dependencies": {
         "discord.js": "^14.15.2",
