@@ -21,7 +21,11 @@ Change the value for `enabled` from `false` to `true`.
 Create a Discord Bot in your [Discord Developer Dashboard](https://discord.com/developers/applications), copy its token and put it into the quotation marks of `token`.  
 
 Should you want to give a Discord user owner rights (for example yourself), copy their Discord user ID and put it, with quotation marks, into the `owners` array. Separate mutliple IDs with a comma.  
-Example: `"owners": ["123", "456", "789"],`
+Example: `"owners": ["123", "456", "789"],`  
+
+> [!NOTE]
+> Specifying an owner is required for requesting comments etc. as only owners are allowed to specify IDs.  
+> You are always forced to specify an ID when requesting from outside the Steam Chat.
 
 Save the file and start the bot. 
 
