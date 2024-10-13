@@ -4,7 +4,7 @@
  * Created Date: 2023-07-06 18:08:39
  * Author: 3urobeat
  *
- * Last Modified: 2024-05-17 23:21:15
+ * Last Modified: 2024-10-13 12:02:53
  * Modified By: 3urobeat
  *
  * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
@@ -55,14 +55,16 @@ DiscordBot.prototype.attachEventHandlers = function() {
     this.bot.on("ready", () => {
         logger("info", "Discord Plugin: Logged in!");
 
-        // Set first game in Steam Bot config as status
-        let game = this.plugin.data.config.playinggames[0];
+        // Set first game in Steam Bot config as status. Check if playinggames exists beforehand to prevent an error
+        let game = this.plugin.data.config.playinggmes ? this.plugin.data.config.playinggames[0] : null;
 
         if (game && typeof game == "string") {
             this.bot.user.setPresence({
                 activities: [{ name: game, type: 0 }], // Type 0 is playing
                 status: "online"
             });
+        } else {
+            logger("debug", "Discord Plugin: No playinggames set in bot config, skipping updating presence...");
         }
 
         // Register all commands from the bot
