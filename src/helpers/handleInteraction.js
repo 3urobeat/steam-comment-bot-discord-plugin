@@ -4,10 +4,10 @@
  * Created Date: 2023-12-20 15:01:09
  * Author: 3urobeat
  *
- * Last Modified: 2024-02-09 22:17:27
+ * Last Modified: 2025-02-04 12:08:27
  * Modified By: 3urobeat
  *
- * Copyright (c) 2023 - 2024 3urobeat <https://github.com/3urobeat>
+ * Copyright (c) 2023 - 2025 3urobeat <https://github.com/3urobeat>
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -93,14 +93,14 @@ async function handleInteractionReply(interaction, str) { // eslint-disable-line
  * Handles interaction when user runs a command
  * @param {Discord.Interaction} interaction
  */
-DiscordBot.prototype.handleInteraction = function(interaction) {
+DiscordBot.prototype.handleInteraction = async function(interaction) {
     if (interaction.type != Discord.InteractionType.ApplicationCommand) return; // Ignore any non-cmd interactions
 
     // Create old styled args array which the Comment Bot understands. The order of this array will follow the order of the options registered in registerCommands()
     let args = interaction.options.data.map(e => e.value);
 
     // Ask the CommandHandler to run the associated command for us
-    let cmd = this.plugin.commandHandler.runCommand(
+    let runResponse = await this.plugin.commandHandler.runCommand(
         interaction.commandName,
         args,
         (x, y, msg) => handleInteractionReply(interaction, msg),
@@ -115,6 +115,8 @@ DiscordBot.prototype.handleInteraction = function(interaction) {
     // Log command usage, map arguments provided into a string
     logger("info", `Discord Plugin: User '${interaction.user.username}' (${interaction.user.id}) ran command: /${interaction.commandName} ${interaction.options.data.map((e) => `${e.name}: ${e.value}`).join(", ")}`);
 
-    // Check if command was not found. This shouldn't be possible as we are using interactions but let's make sure
-    if (!cmd) interaction.reply("This command was not found!");
+    // Resolve interaction instantly if runCommand() indicated failure, respondModule won't ever be called as the request didn't even make it past runCommand()
+    if (!runResponse.success) {
+        interaction.reply(runResponse.message || runResponse.reason);
+    }
 };
